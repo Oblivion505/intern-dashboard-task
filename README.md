@@ -19,6 +19,8 @@ This is a starter monorepo for a device monitoring dashboard. Your task is to im
 
 - [Bun](https://bun.sh) installed on your system
 
+> **_NOTE:_** Please disable all code completion extensions on your IDE before continuing with this assessment
+
 ### Installation
 
 ```bash
