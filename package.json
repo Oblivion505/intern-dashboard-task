@@ -1,0 +1,19 @@
+{
+  "name": "intern-task",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun run scripts/dev.ts",
+    "dev:api": "bun --filter api dev",
+    "dev:web": "bun --filter web dev",
+    "lint": "echo 'Linting not configured yet'"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}
+
