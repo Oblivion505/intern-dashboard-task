@@ -125,12 +125,70 @@ app.get("/devices/:id/readings", (req, res) => {
 // POST /devices/:id/readings
 // TODO: Candidate task - implement this endpoint
 app.post("/devices/:id/readings", (req, res) => {
-  const error: ErrorResponse = {
-    error: {
-      message: "Not implemented - candidate task",
-    },
+
+  let ids: string[] = [];
+
+  devices.forEach((device) => {
+
+    ids.push(device.id.toString());
+
+  })
+
+  const reqID = req.params.id
+
+  // Checking if requested device exists
+  if (!ids.includes(reqID)) 
+  {
+    const error: ErrorResponse = {
+      error: {
+        message: "Device not found",
+        details: reqID ,
+      },
+    };
+
+    return res.status(404).json(error);
+  }
+
+  // Validating request body using Zod
+  const parseResult = createReadingSchema.safeParse(req.body)
+
+  if (parseResult.error) 
+  {
+    const error: ErrorResponse = {
+      error: {
+        message: "Invalid request body",
+        details: parseResult.error ,
+      },
+    };
+
+    return res.status(400).json(error)
+  }
+
+  const data: CreateReadingRequest = parseResult.data;
+
+  if (!data.timestamp) 
+  {
+    data.timestamp = new Date().toISOString()
+  }
+
+  const newReading: Reading = {
+
+    id : `reading-${crypto.randomUUID()}`, 
+
+    deviceId : parseInt(reqID),
+
+    timestamp : data.timestamp, 
+
+    powerUsageKw : data.powerUsageKw
+
   };
-  res.status(501).json(error);
+
+  // Adds new reading to in-memory store
+  readings.push(newReading)
+  
+  readings.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
+  return res.status(201).json(newReading);
 });
 
 // Start server
