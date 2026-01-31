@@ -123,7 +123,6 @@ app.get("/devices/:id/readings", (req, res) => {
 });
 
 // POST /devices/:id/readings
-// TODO: Candidate task - implement this endpoint
 app.post("/devices/:id/readings", (req, res) => {
 
   let ids: string[] = [];
