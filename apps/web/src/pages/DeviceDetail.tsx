@@ -162,9 +162,6 @@ function DeviceDetail({ deviceId }: DeviceDetailProps) {
 
       <div className="bg-white rounded-lg shadow p-6">
         <h3 className="text-lg font-semibold mb-4">Create Reading</h3>
-        <p className="text-xs text-gray-500 mb-4">
-          POST endpoint is part of the task
-        </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label htmlFor="powerUsageKw" className="block text-sm font-medium text-gray-700 mb-1">
