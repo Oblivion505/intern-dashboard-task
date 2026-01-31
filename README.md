@@ -141,3 +141,29 @@ Please submit:
 3. Completed "If this were production..." section in README
 
 The goal is to test endpoint creation + integration, not UI design.
+
+## If this were production...
+
+### Scale/Performance
+
+For scale, I would consider using a database to store the devices and readings as 2 separate tables. This would be much better than storing them in memory as the data will persist if the server shuts down. For performance, indexing and query optimisation can be used to reduce the time spent on retrieving data, leading to less latency for requests.
+
+### Data Integrity
+
+By using a database for data storage, constraints can be added to the tables to ensure that any data being added must conform to a set of validation checks. Triggers can also be added to automatically respond to data manipulation queries and prevent unauthorised updates.
+
+### Security
+
+Authenticate the user when requests are made to the API, such as including an API key with the request. 
+
+### API Design/Versioning
+
+The version of the API being used could be specified in the URL of the request, so that previous versions of the API can still be accessed. 
+
+### Realtime
+
+Automatic requests could be made periodically to the server to update the device list if any changes had been made to the data.
+
+### Observability
+
+Log the frequency and response times of API requests, high response times could indicate a problem with the API.  
